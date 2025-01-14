@@ -1,3 +1,4 @@
+document.getElementById('lista-amigos').addEventListener('click', removerNome);
 let listaAmigos = [];
 let amigoCampo = document.getElementById('nome-amigo');
 let amigoIncluido = document.getElementById('lista-amigos');
@@ -6,12 +7,12 @@ function adicionar() {
     if (nomeAmigo.length >= 3 && nomeAmigo != '') {
         if (!listaAmigos.includes(nomeAmigo)) {
             if (amigoIncluido.textContent == '') {
-                amigoIncluido.textContent += `${nomeAmigo}`;
+                amigoIncluido.innerHTML += `<span class="amigo">${nomeAmigo}</span>`;
             }
             else {
-                amigoIncluido.textContent += `, ${nomeAmigo}`;
+                amigoIncluido.innerHTML += `<span class="amigo">, ${nomeAmigo}</span>`;
             }
-            listaAmigos.push(nomeAmigo);
+            listaAmigos.push(nomeAmigo.toString().toUpperCase());
             amigoCampo.value = '';
         }
         else {
@@ -58,8 +59,8 @@ function reiniciar() {
     amigoIncluido.textContent = '';
     campoSorteio.textContent = '';
 }
-/*function removerNome(){
-    amigoIncluido.addEventListener('click', function(){
-        this.remove();
-    });
-}*/
+function removerNome(event){
+    if (event.target && event.target.classList.contains('amigo')) {
+        event.target.remove();
+    }
+}
